@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <!-- <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f0f2f5; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 350px; }
+        
+        form.add-form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        ul { list-style: none; padding: 0; }
+        li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        
+        .action-group { display: flex; gap: 8px; align-items: center; }
+        
+        .edit-btn { color: #007bff; background: none; border: 1px solid #007bff; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .edit-btn:hover { background: #007bff; color: white; }
+        
+        .delete-btn { color: red; cursor: pointer; border: none; background: none; font-size: 18px; line-height: 1; }
+    </style> -->
+</head>
+<body>
+
+<div class="card">
+    <h2>Task Manager</h2>
+    
+    <form class="add-form" action="/add" method="POST">
+        <input type="text" name="task" placeholder="New task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <ul id="taskList"></ul>
+</div>
+
+<form id="editForm" action="/edit" method="POST" style="display:none;">
+    <input type="hidden" name="index" id="editIndex">
+    <input type="hidden" name="newTask" id="editValue">
+</form>
+
+<script>
+    // 1. Single Fetch call to render the list
+    fetch('/tasks')
+        .then(res => res.json())
+        .then(tasks => {
+            const list = document.getElementById('taskList');
+            list.innerHTML = ''; // Clear list first to be safe
+
+            tasks.forEach((task, index) => {
+                list.innerHTML += `
+                    <li>
+                        <span>${task}</span>
+                        <div class="action-group">
+                            <button onclick="editTask(${index}, '${task}')" class="edit-btn">Edit</button>
+                            
+                            <form action="/delete" method="POST" style="display:inline;">
+                                <input type="hidden" name="index" value="${index}">
+                                <button type="submit" class="delete-btn">✖</button>
+                            </form>
+                        </div>
+                    </li>
+                `;
+            });
+        });
+
+    // 2. The Edit Logic
+    function editTask(index, oldTask) {
+        const newTask = prompt("Edit your task:", oldTask);
+        if (newTask && newTask.trim() !== "" && newTask !== oldTask) {
+            document.getElementById('editIndex').value = index;
+            document.getElementById('editValue').value = newTask;
+            document.getElementById('editForm').submit();
+        }
+    }
+</script>
+
+</body>
+</html>
