@@ -15,7 +15,7 @@ http.get("http://www.google.com/index.html",(res)=>{
     console.log("HTTP GET")
     console.log(`Got response ${res.statusCode}`);
     res.resume();
-});  //here .end is not needed get send request automatically 
+}); 
 
 
 const options={
