@@ -12,7 +12,8 @@ let totalRevenue = 0;
 
 const USERS_DB = {
     "Aayush": "1234",
-    "Mohan": "5678"
+    "Mohan": "5678",
+    "Rahul": "9012"
 };
 
 
