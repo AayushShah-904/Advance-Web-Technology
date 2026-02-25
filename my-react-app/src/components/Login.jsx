@@ -29,30 +29,36 @@ export default function Login({ onLoginSuccess }) {
   };
 
   return (
-  <div className="container">
-    <h2>PDPU Portal</h2>
-    <p>Sign in to access your dashboard</p>
-    <form onSubmit={handleLogin}>
-      <input 
-        type="email" 
-        placeholder="Email Address" 
-        onChange={(e) => setEmail(e.target.value)} 
-        required 
-      />
-      <input 
-        type="password" 
-        placeholder="Password" 
-        onChange={(e) => setPassword(e.target.value)} 
-        required 
-      />
-      <button type="submit">Login</button>
-    </form>
-    
-    {msg && (
-      <div className={`status-msg ${msg.includes('Success') ? 'success' : 'loading'}`}>
-        {msg}
-      </div>
-    )}
+  <div className="auth-wrapper">
+    <div className="card">
+      <h1 className="h-title">PDPU Portal</h1>
+      <p className="sub-title">Enter your credentials to manage your internship & NOC requests.</p>
+      
+      <form onSubmit={handleLogin}>
+        <div className="form-group">
+          <label className="label">Email Address</label>
+          <input 
+            className="input-field" 
+            type="email" 
+            placeholder="name@university.edu" 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+        </div>
+        <div className="form-group">
+          <label className="label">Password</label>
+          <input 
+            className="input-field" 
+            type="password" 
+            placeholder="••••••••" 
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+        </div>
+        <button className="btn-primary" type="submit">Sign In</button>
+      </form>
+      {msg && <p style={{ marginTop: '1rem', color: '#4f46e5', fontWeight: '500' }}>{msg}</p>}
+    </div>
   </div>
 );
 }

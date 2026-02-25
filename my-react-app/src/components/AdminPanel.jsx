@@ -9,3 +9,20 @@ export default function AdminPanel({ user }) {
     </div>
   );
 }
+
+const LogoutButton = ({ onLogout }) => {
+  const handleLogout = () => {
+    // Clear state in the parent (App.jsx)
+    onLogout();
+    console.log("User session cleared.");
+  };
+
+  return (
+    <button 
+      onClick={handleLogout}
+      className="btn-logout"
+    >
+      Sign Out
+    </button>
+  );
+};

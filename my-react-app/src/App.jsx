@@ -36,8 +36,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
-import StudentDashboard from './components/StudentDashboard';
+import StudentDashboard from './components/StudentDashBoard';
 import AdminPanel from './components/AdminPanel';
+import Logout from './components/Logout';
 import './App.css'
 
 function App() {
@@ -53,6 +54,8 @@ function App() {
           )
         } />
 
+        <Route path="/logout" element={<Logout setUser={setUser} />} />
+        
         {/* Protected Routes */}
         <Route path="/student" element={user ? <StudentDashboard user={user} /> : <Navigate to="/" />} />
         <Route path="/admin" element={user ? <AdminPanel user={user} /> : <Navigate to="/" />} />
