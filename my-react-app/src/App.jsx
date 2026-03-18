@@ -39,6 +39,8 @@ import Login from './components/Login';
 import StudentDashboard from './components/StudentDashBoard';
 import AdminPanel from './components/AdminPanel';
 import Logout from './components/Logout';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import './App.css'
 
 function App() {
@@ -46,7 +48,9 @@ function App() {
 
   return (
     <Router>
+      <Header/> 
       <Routes>
+        
         {/* If not logged in, show Login page. If logged in, redirect based on role */}
         <Route path="/" element={
           !user ? <Login onLoginSuccess={(u) => setUser(u)} /> : (
@@ -59,7 +63,9 @@ function App() {
         {/* Protected Routes */}
         <Route path="/student" element={user ? <StudentDashboard user={user} /> : <Navigate to="/" />} />
         <Route path="/admin" element={user ? <AdminPanel user={user} /> : <Navigate to="/" />} />
+        
       </Routes>
+      <Footer/>
     </Router>
   );
 }
