@@ -14,7 +14,7 @@ def index():
     
     return "Welcome to index page"
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     
     data = request.get_json()
