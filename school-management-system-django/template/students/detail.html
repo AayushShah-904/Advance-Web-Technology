@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ student.full_name }} – SMS{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>{{ student.full_name }}</h2>
+  <div class="d-flex gap-2">
+    <a href="{% url 'student-list' %}" class="btn btn-outline-secondary">← Back</a>
+    <a href="{% url 'student-delete' student.pk %}" class="btn btn-outline-danger">Deactivate</a>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm" style="max-width:600px">
+  <div class="card-body p-4">
+    <table class="table table-borderless mb-0">
+      <tr>
+        <th class="text-muted" width="160">Student ID</th>
+        <td><code>{{ student.student_id }}</code></td>
+      </tr>
+      <tr>
+        <th class="text-muted">Full Name</th>
+        <td>{{ student.full_name }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Email</th>
+        <td>{{ student.email }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Phone</th>
+        <td>{{ student.phone|default:"—" }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Gender</th>
+        <td>{{ student.get_gender_display }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Department</th>
+        <td>{{ student.department }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Enrolled On</th>
+        <td>{{ student.enrolled_on }}</td>
+      </tr>
+      <tr>
+        <th class="text-muted">Status</th>
+        <td>
+          {% if student.is_active %}
+            <span class="badge bg-success">Active</span>
+          {% else %}
+            <span class="badge bg-danger">Inactive</span>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}

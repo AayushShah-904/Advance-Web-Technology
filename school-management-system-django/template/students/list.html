@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Students – SMS{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>All Students</h2>
+  <a href="{% url 'student-create' %}" class="btn btn-primary">+ Add Student</a>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-body">
+    <form method="get" class="row g-2">
+      <div class="col-md-5">
+        <input type="text" name="q" class="form-control"
+               placeholder="Search by name or ID..." value="{{ query }}">
+      </div>
+      <div class="col-md-4">
+        <select name="dept" class="form-select">
+          <option value="">All Departments</option>
+          {% for d in departments %}
+            <option value="{{ d.pk }}">{{ d.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-outline-primary w-100">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Enrolled</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in students %}
+        <tr>
+          <td><code>{{ s.student_id }}</code></td>
+          <td>
+            <a href="{% url 'student-detail' s.pk %}">{{ s.full_name }}</a>
+          </td>
+          <td>{{ s.email }}</td>
+          <td>{{ s.department }}</td>
+          <td>{{ s.enrolled_on }}</td>
+          <td>
+            <a href="{% url 'student-detail' s.pk %}"
+               class="btn btn-sm btn-outline-primary">View</a>
+            <a href="{% url 'student-delete' s.pk %}"
+               class="btn btn-sm btn-outline-danger">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center text-muted py-4">
+            No students found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
