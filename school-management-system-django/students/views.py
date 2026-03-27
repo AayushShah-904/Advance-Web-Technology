@@ -1,8 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.db.models import Q
 from .models import Student, Department, Course
+
+def is_admin(user):
+    return user.is_superuser
+
+def is_teacher(user):
+    return user.groups.filter(name='Teacher').exists() or user.is_superuser
+
+def is_student_user(user):
+    return user.groups.filter(name='Student').exists()
 
 @login_required
 def dashboard(request):
@@ -38,7 +47,9 @@ def student_detail(request, pk):
     return render(request, 'students/detail.html',
                   {'student': student})
 
+
 @login_required
+@user_passes_test(is_teacher)
 def student_create(request):
     if request.method == 'POST':
         # handle form POST
@@ -46,3 +57,16 @@ def student_create(request):
         return redirect('student-list')
     return render(request, 'students/form.html',
                   {'title': 'Add Student'})
+
+@login_required
+@user_passes_test(is_admin)
+def admin_only_view(request):
+    """Strictly for Superusers"""
+    return render(request, 'students/admin_panel.html')
+
+
+def home(request):
+    return render(request,'partials/home.html')
+
+
+#23BCP002BReNN

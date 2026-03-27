@@ -190,7 +190,7 @@ JAZZMIN_SETTINGS = {
     #############
     # UI Tweaks #
     #############
-    "custom_css": None,
+    "custom_css": "admin/css/custom.css",
     "custom_js": None,
     "use_google_fonts_cdn": True,
     "show_ui_builder": True,   # ← lets you tweak theme live at /admin/
@@ -199,6 +199,9 @@ JAZZMIN_SETTINGS = {
     # Change view #
     ###############
     "changeform_format": "horizontal_tabs",
+    
+    
+    
 }
 
 JAZZMIN_UI_TWEAKS = {

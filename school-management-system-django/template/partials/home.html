@@ -1,0 +1,17 @@
+<nav>
+    <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'student-list' %}">View All Students</a></li>
+        <li><a href="{% url 'student-create' %}">Add New Student</a></li>
+        
+        <hr>
+
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout ({{ user.username }})</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+        
+        <li><a href="/admin/">Admin Panel</a></li>
+    </ul>
+</nav>

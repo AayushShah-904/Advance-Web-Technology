@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Department(models.Model):
     name = models.CharField(max_length=100)
@@ -11,6 +12,8 @@ class Department(models.Model):
 class Student(models.Model):
     GENDER = [('M','Male'),('F','Female'),('O','Other')]
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    
     student_id  = models.CharField(max_length=20, unique=True)
     first_name  = models.CharField(max_length=100)
     last_name   = models.CharField(max_length=100)

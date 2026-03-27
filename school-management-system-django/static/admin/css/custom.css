@@ -1,0 +1,77 @@
+/* ============================================================
+   Fix: Django Admin Groups/Permissions widget at 100% zoom
+   Apply this in your custom admin CSS file
+   ============================================================ */
+
+/* Make the main form row wrap properly */
+.field-permissions .related-widget-wrapper,
+.field-permissions > div {
+    width: 100%;
+}
+
+/* Fix the permissions selector container */
+.selector {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px;
+    width: 100% !important;
+}
+
+/* Each side (available + chosen) should take equal space */
+.selector .selector-available,
+.selector .selector-chosen {
+    flex: 1 1 280px !important;
+    min-width: 240px !important;
+    width: auto !important;
+}
+
+/* Make the select list fill its container and scroll properly */
+.selector select {
+    width: 100% !important;
+    min-height: 180px !important;
+    max-height: 220px !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix the middle arrow buttons column */
+.selector .selector-chooser {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    padding: 0 6px !important;
+}
+
+/* Ensure the filter inputs stretch full width */
+.selector .selector-filter input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Prevent the overall content area from being too cramped */
+#content-main,
+.content-main {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix the form row to not overflow */
+.form-row {
+    overflow: visible !important;
+}
+
+/* Jazzmin-specific: fix sidebar + content layout at 100% zoom */
+@media (max-width: 1400px) {
+    .selector .selector-available,
+    .selector .selector-chosen {
+        flex: 1 1 200px !important;
+        min-width: 180px !important;
+    }
+
+    .selector select {
+        min-height: 140px !important;
+    }
+}

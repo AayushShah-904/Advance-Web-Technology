@@ -37,3 +37,22 @@
     </div>
   </div>
 </nav>
+
+
+{% if user.is_superuser %}
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/">Admin Panel</a>
+  </li>
+{% endif %}
+
+{% if user.is_superuser or user.groups.all.0.name == 'Teacher' %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'student-create' %}">Add Student</a>
+  </li>
+{% endif %}
+
+{% if user.groups.all.0.name == 'Student' %}
+  <li class="nav-item">
+    <a class="nav-link" href="/my-profile/">My Profile</a>
+  </li>
+{% endif %}
