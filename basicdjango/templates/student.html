@@ -1,0 +1,75 @@
+<!-- <head>
+    <body>
+        <h1>student details</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll Number</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</head> -->
+
+<head>
+    <title>Student Registration</title>
+</head>
+<body>
+    <h2>Add new Student</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Name</label><br>
+        <input type="text" name="name"><br><br>
+
+        <label>Roll Number</label><br>
+        <input type="text" name="roll_number"><br><br>
+
+        <label>Email</label><br>
+        <input type="text" name="email"><br><br>
+
+        <label>Course</label><br>
+        <input type="text" name="course"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+
+<hr> <!-- Visual separator -->
+
+<h2>All Registered Students</h2>
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Email</th>
+            <th>Course</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.roll_number }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.course }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No students found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
